@@ -6,3 +6,9 @@ export interface LoginDTO {
 export interface CredentialDTO {
   accessToken: string
 }
+
+export interface RegisterDTO {
+  username: string
+  password: string
+  email: string
+}
