@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom'
 const Login = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
-  const [username, setUsername] = useState<string>('')
+  const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
     try {
-      await login(username, password)
-      navigate('/')
+      await login(email, password)
+      // navigate('/')
     } catch (err) {
       console.log(err)
     }
@@ -27,22 +27,22 @@ const Login = () => {
         </h2>
       </div>
 
-      {/* Username */}
+      {/* email */}
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">
-              Username
+            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+              email
             </label>
             <div className="mt-2">
               <input
-                id="username"
-                name="username"
-                type="username"
-                autoComplete="username"
+                id="email"
+                name="email"
+                type="email"
+                autoComplete="email"
                 required
                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </div>
