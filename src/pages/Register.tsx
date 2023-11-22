@@ -1,9 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { RegisterDTO } from '../types/dto'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
+import { RegisterDTO } from '../types/dto'
 
 interface RegisterFormValues {
   username: string
@@ -13,16 +12,8 @@ interface RegisterFormValues {
 }
 
 const Register = () => {
-  const navigate = useNavigate()
-  const [success, setSuccess] = useState(null)
-  const [error, setError] = useState(null)
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  })
-
-  const { username, email, password } = formData
+  const [success, setSuccess] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const initialValues: RegisterFormValues = {
     username: '',
@@ -34,41 +25,37 @@ const Register = () => {
   const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
 
   const validationSchema = yup.object({
-    username: yup.string().min(3, 'Username must be at least 3 characters').required('username is required!'),
-    email: yup.string().email('Please enter a valid email address').required(),
-    password: yup.string().matches(PASSWORD_REGEX, 'Please enter a strong password').required(),
+    username: yup.string().min(3, 'Username must be at least 3 characters').required('Username is required!'),
+    email: yup.string().email('Please enter a valid email address').required('Email is required!'),
+    password: yup.string().matches(PASSWORD_REGEX, 'Please enter a strong password').required('Password is required!'),
     confirmPassword: yup
       .string()
       .required('Please confirm your password')
       .oneOf([yup.ref('password')], 'Passwords must match'),
   })
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values: RegisterFormValues) => {
     try {
       const registerData: RegisterDTO = {
-        username,
-        password,
-        email,
+        username: values.username,
+        password: values.password,
+        email: values.email,
       }
 
-      const response = await axios.post('http://localhost:5000/api/v1/register', registerData)
+      const response = await axios.post('http://localhost:8080/user/', registerData)
 
       console.log('Registration successful:', response.data)
-
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
-      })
-      setError(null)
       setSuccess(response.data.message)
-      navigate('/login')
+      setError(null)
+      // Clear form values after successful registration
+      // navigate('/login');
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response) setError(err.response.data.message)
         setSuccess(null)
       } else {
-        console.error('Registration error:', error)
+        console.error('Registration error:', err)
+        setError('Internal Server Error')
       }
     }
   }
@@ -99,7 +86,7 @@ const Register = () => {
             </div>
 
             <div>
-              <label htmlFor="confirmPassword">รหัสผ่าน</label>
+              <label htmlFor="confirmPassword">ยืนยันรหัสผ่าน</label>
               <Field type="password" id="confirmPassword" name="confirmPassword" />
               <ErrorMessage name="confirmPassword" component="div" />
             </div>

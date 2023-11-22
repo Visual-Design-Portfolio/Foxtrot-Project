@@ -9,10 +9,10 @@ interface IAuthProviderProps {
 
 interface IAuthContextType {
   isLoggedIn: boolean
-  username: string | null
+  email: string | null
   token: string | null
   logout: () => void
-  login: (username: string, password: string) => Promise<void>
+  login: (email: string, password: string) => Promise<void>
 }
 
 const AuthContext = createContext<IAuthContextType | null>(null)
@@ -26,36 +26,36 @@ export const useAuth = () => {
 }
 
 const token = localStorage.getItem('token')
-const user = localStorage.getItem('username')
+const user = localStorage.getItem('email')
 
 const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [isLoggedIn, setIsLoggedin] = useState<boolean>(!!token)
-  const [username, setUsername] = useState<string | null>(user)
+  const [email, setEmail] = useState<string | null>(user)
   const navigate = useNavigate()
 
-  const login = async (username: string, password: string) => {
-    const loginBody: LoginDTO = { username, password }
+  const login = async (email: string, password: string) => {
+    const loginBody: LoginDTO = { email, password }
 
     try {
-      const res = await axios.post<CredentialDTO>('https://www.melivecode.com/api/login', loginBody, {
+      const res = await axios.post<CredentialDTO>('http://localhost:8080/auth/login', loginBody, {
         headers: { 'Content-Type': 'application/json' },
       })
 
       localStorage.setItem('token', res.data.accessToken)
-      localStorage.setItem('username', username)
+      localStorage.setItem('email', email)
       setIsLoggedin(true)
-      setUsername(username)
+      setEmail(email)
     } catch (err) {
-      throw new Error('Invalid username or password')
+      throw new Error('Invalid email or password')
     }
   }
   const logout = () => {
     localStorage.clear()
     setIsLoggedin(false)
-    setUsername(null)
+    setEmail(null)
     navigate('/')
   }
-  return <AuthContext.Provider value={{ isLoggedIn, login, username, logout, token }}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{ isLoggedIn, login, email, logout, token }}>{children}</AuthContext.Provider>
 }
 
 export default AuthProvider
