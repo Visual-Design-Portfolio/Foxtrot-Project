@@ -1,16 +1,5 @@
-// ProjectForm.js
 import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import { EducationDTO } from '../../types/dto'
-
-
-// interface EducationDTO {
-//     school: string
-//     degree: string
-//     major: string
-//     startDate: Date
-//     endDate: Date
-//   }
 
 interface EducationFormProps {
   educationList: EducationDTO[]
@@ -18,35 +7,30 @@ interface EducationFormProps {
 }
 
 const EducationForm = ({ educationList, setEducationList }: EducationFormProps) => {
-
-  
-  const handleEducationChange = (id: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const index = educationList.findIndex((education) => education.id === id)
-    const updatedEducation = [...educationList] as any
-    if (e.target.name === 'startDate' || e.target.name === 'endDate') {
-      updatedEducation[index][e.target.name] = new Date(e.target.value)
+  const handleEducationChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const updatedEducation = [...educationList]
+    const key = e.target.name as keyof EducationDTO;
+    if (key === 'startDate' || key === 'endDate') {
+      updatedEducation[index][key] = new Date(e.target.value)
     } else {
-      updatedEducation[index][e.target.name] = e.target.value
+      updatedEducation[index][key] = e.target.value
     }
-
     setEducationList(updatedEducation)
   }
 
   const handleAddEducation = () => {
     const newEducation = {
-      id: uuidv4(),
       school: '',
       degree: '',
       major: '',
       startDate: new Date(),
       endDate: new Date(),
     }
-
     setEducationList([...educationList, newEducation])
   }
 
-  const handleDeleteEducation = (id: string) => {
-    const updatedEducation = educationList.filter((education) => education.id !== id)
+  const handleDeleteEducation = (index: number) => {
+    const updatedEducation = educationList.filter((_education, idx) => idx !== index)
     setEducationList(updatedEducation)
   }
 
@@ -54,77 +38,77 @@ const EducationForm = ({ educationList, setEducationList }: EducationFormProps) 
     <div className="bg-white rounded-md shadow-md p-6">
       <h2 className="text-lg font-semibold mb-4">Add new Education</h2>
       <div className="space-y-6">
-        {educationList.map((education) => (
-          <div key={education.id} className="border rounded-md p-4">
+        {educationList.map((education, index) => (
+          <div key={index} className="border rounded-md p-4">
             <div className="space-y-4">
               <div>
-                <label htmlFor={`school_${education.id}`} className="block mb-1 font-medium">
+                <label htmlFor={`school_${index}`} className="block mb-1 font-medium">
                   School
                 </label>
                 <input
                   name="school"
-                  onChange={(e) => handleEducationChange(education.id, e)}
+                  onChange={(e) => handleEducationChange(index, e)}
                   type="text"
                   value={education.school}
-                  id={`school_${education.id}`}
+                  id={`school_${index}`}
                   className="border rounded-md w-full px-3 py-2 focus:outline-none focus:border-blue-500"
                 />
               </div>
               <div>
-                <label htmlFor={`degree_${education.id}`} className="block mb-1 font-medium">
+                <label htmlFor={`degree_${index}`} className="block mb-1 font-medium">
                   Degree
                 </label>
                 <input
                   type="text"
                   name="degree"
                   value={education.degree}
-                  onChange={(e) => handleEducationChange(education.id, e)}
-                  id={`degree_${education.id}`}
+                  onChange={(e) => handleEducationChange(index, e)}
+                  id={`degree_${index}`}
                   className="border rounded-md w-full px-3 py-2 focus:outline-none focus:border-blue-500"
                 />
               </div>
               <div>
-                <label htmlFor={`major_${education.id}`} className="block mb-1 font-medium">
+                <label htmlFor={`major_${index}`} className="block mb-1 font-medium">
                   Major
                 </label>
                 <input
                   name="major"
                   type="text"
                   value={education.major}
-                  onChange={(e) => handleEducationChange(education.id, e)}
-                  id={`major_${education.id}`}
+                  onChange={(e) => handleEducationChange(index, e)}
+                  id={`major_${index}`}
                   className="border rounded-md w-full px-3 py-2 focus:outline-none focus:border-blue-500"
                 />
               </div>
               <div>
-                <label htmlFor={`startDate_${education.id}`} className="block mb-1 font-medium">
+                <label htmlFor={`startDate_${index}`} className="block mb-1 font-medium">
                   Start Date
                 </label>
                 <input
                   name="startDate"
                   type="date"
                   value={education.startDate.toISOString().split('T')[0]}
-                  onChange={(e) => handleEducationChange(education.id, e)}
-                  id={`startDate_${education.id}`}
+                  onChange={(e) => handleEducationChange(index, e)}
+                  id={`startDate_${index}`}
                   className="border rounded-md w-full px-3 py-2 focus:outline-none focus:border-blue-500"
                 />
               </div>
               <div>
-                <label htmlFor={`endDate_${education.id}`} className="block mb-1 font-medium">
+                <label htmlFor={`endDate_${index}`} className="block mb-1 font-medium">
                   End Date
                 </label>
                 <input
                   name="endDate"
                   type="date"
                   value={education.endDate.toISOString().split('T')[0]}
-                  onChange={(e) => handleEducationChange(education.id, e)}
-                  id={`endDate_${education.id}`}
+                  onChange={(e) => handleEducationChange(index, e)}
+                  id={`endDate_${index}`}
                   className="border rounded-md w-full px-3 py-2 focus:outline-none focus:border-blue-500"
                 />
               </div>
               <button
                 type="button"
-                onClick={() => handleDeleteEducation(education.id)}
+                onClick={() => handleDeleteEducation(index)}
                 className="mt-2 px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
               >
                 Remove Education

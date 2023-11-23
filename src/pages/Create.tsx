@@ -2,40 +2,30 @@ import { FormEvent, useState } from 'react'
 import PortfolioInfoForm from '../components/FormCreate/PortfolioInfoForm'
 import TechStackForm from '../components/FormCreate/TechStackForm'
 import ProjectForm from '../components/FormCreate/ProjectForm'
-import { v4 as uuidv4 } from 'uuid'
-import { EducationDTO, PortfolioInfoDTO, ProjectDTO, SkillsDTO, WorkExperienceDTO } from '../types/dto'
+import { EducationDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
 import EducationForm from '../components/FormCreate/EducationForm'
 import WorkExperienceForm from '../components/FormCreate/WorkExperienceForm'
 import usePortfolios from '../hooks/usePortfolios'
 
 const initialPortInfo = {
-  portfolioName: '',
-  titleName: '',
-  profilePicture: null,
+  //อย่าลืมใส่ interface
+  name: '',
+  ownerName: '',
+  picture: null,
 }
 
 const initialProjectList = [
   {
     title: '',
-    id: uuidv4(),
     detail: '',
     linkProject: '',
     linkGitRepo: '',
-    category: [
-      {
-        name: '',
-      },
-    ],
-    tag: [
-      {
-        name: '',
-      },
-    ],
+    category: [],
+    tag: [],
   },
 ]
 const initialEducationList = [
   {
-    id: uuidv4(),
     school: '',
     degree: '',
     major: '',
@@ -45,7 +35,6 @@ const initialEducationList = [
 ]
 const initialWorkExperienceList = [
   {
-    id: uuidv4(),
     position: '',
     employeeType: '',
     companyName: '',
@@ -56,21 +45,10 @@ const initialWorkExperienceList = [
 ]
 
 const Create = () => {
-  const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
   const { createPortfolio } = usePortfolios()
 
-  const [selectedTechStack, setSelectedTechStack] = useState<SkillsDTO[]>([{ name: '' }])
-  const TechStack: SkillsDTO[] = [
-    { name: 'React' },
-    { name: 'Vue.js' },
-    { name: 'Angular' },
-    { name: 'Node.js' },
-    { name: 'Express.js' },
-    { name: 'MongoDB' },
-    { name: 'Firebase' },
-    { name: 'Tailwind CSS' },
-  ]
-
+  const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
+  const [selectedTechStack, setSelectedTechStack] = useState<string[]>([])
   const [projectList, setProjectList] = useState<ProjectDTO[]>(initialProjectList)
   const [educationList, setEducationList] = useState<EducationDTO[]>(initialEducationList)
   const [workExperienceList, setWorkExperienceList] = useState<WorkExperienceDTO[]>(initialWorkExperienceList)
@@ -84,10 +62,7 @@ const Create = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      // console.log(typeof newUrl, newComment, newRating)
-      // createContent(newUrl, newComment, newRating)
-      createPortfolio(portfolioInfo, selectedTechStack, projectList, educationList, workExperienceList)
-      console
+      await createPortfolio(portfolioInfo, selectedTechStack, projectList, educationList, workExperienceList)
     } catch (err) {
       console.log(err)
     }
@@ -101,7 +76,7 @@ const Create = () => {
           <TechStackForm
             selectedTechStack={selectedTechStack}
             setSelectedTechStack={setSelectedTechStack}
-            TechStack={TechStack}
+            // TechStack={TechStack}
           />
         </div>
 

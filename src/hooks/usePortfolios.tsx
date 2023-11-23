@@ -1,19 +1,13 @@
-import {
-  CreatePortfolioDTO,
-  EducationDTO,
-  PortfolioInfoDTO,
-  ProjectDTO,
-  SkillsDTO,
-  WorkExperienceDTO,
-} from '../types/dto'
+import { CreatePortfolioDTO, EducationDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
 import { useAuth } from '../providers/AuthProvider'
+import axios from 'axios'
 
 const usePortfolios = () => {
   const { token } = useAuth()
 
   const createPortfolio = async (
     portfolioInfo: PortfolioInfoDTO,
-    selectedTechStack: SkillsDTO[],
+    selectedTechStack: string[],
     projectList: ProjectDTO[],
     educationList: EducationDTO[],
     workExperienceList: WorkExperienceDTO[],
@@ -28,12 +22,12 @@ const usePortfolios = () => {
 
     try {
       console.log(newPortfolio)
-      // await axios.post('https://api.learnhub.thanayut.in.th/content', newPortfolio, {
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     Authorization: `Bearer ${token}`,
-      //   },
-      // })
+      await axios.post('http://localhost:8080/portfolio/', newPortfolio, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
     } catch (err) {
       throw new Error('Cannot create this protfolio')
     }

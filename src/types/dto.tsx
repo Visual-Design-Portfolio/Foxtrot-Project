@@ -13,23 +13,29 @@ export interface RegisterDTO {
   email: string
 }
 
+export interface PortfolioDTO {
+  portfolioInfo: PortfolioInfoDTO
+  createdAt: Date
+  updatedAt: Date
+  education: EducationDTO[]
+  workExperience: WorkExperienceDTO[]
+}
+
 export interface CreatePortfolioDTO {
   portfolioInfo: PortfolioInfoDTO
   education: EducationDTO[]
   workExperience: WorkExperienceDTO[]
   project: ProjectDTO[]
-  skill: SkillsDTO[]
-  template?: TemplateDTO[]
+  skill: string[]
 }
 
 export interface PortfolioInfoDTO {
-  portfolioName: string
-  titleName: string
-  profilePicture?: File | null
+  name: string
+  ownerName: string
+  picture?: File | null
 }
 
 export interface EducationDTO {
-  id: string
   school: string
   degree: string
   major: string
@@ -37,7 +43,6 @@ export interface EducationDTO {
   endDate: Date
 }
 export interface WorkExperienceDTO {
-  id:string
   position: string
   employeeType: string
   companyName: string
@@ -46,26 +51,11 @@ export interface WorkExperienceDTO {
   endDate: Date
 }
 export interface ProjectDTO {
-  id: string
   title: string
   detail: string
-  // picture: string
-  category: { name: string }[]
-  tag: { name: string }[]
+  picture?: string
+  category: string[]
+  tag: string[]
   linkProject: string
   linkGitRepo: string
-}
-
-export interface TemplateDTO {
-  id: number
-  name: string
-  url: string
-}
-export interface SkillItem {
-  // name: string
-}
-
-export interface SkillsDTO {
-  // skills: SkillItem[]
-  name: string
 }

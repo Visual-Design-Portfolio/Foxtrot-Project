@@ -2,7 +2,6 @@
 import React from 'react'
 import { PortfolioInfoDTO } from '../../types/dto'
 
-
 interface PortfolioInfoFormProps {
   portfolioInfo: PortfolioInfoDTO
   setPortfolioInfo: React.Dispatch<React.SetStateAction<PortfolioInfoDTO>>
@@ -26,8 +25,8 @@ const PortfolioInfoForm = ({ portfolioInfo, setPortfolioInfo }: PortfolioInfoFor
         </label>
         <input
           type="text"
-          name="portfolioName"
-          value={portfolioInfo.portfolioName}
+          name="name"
+          value={portfolioInfo.name}
           onChange={handleInputChange}
           className="border rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
         />
@@ -38,8 +37,8 @@ const PortfolioInfoForm = ({ portfolioInfo, setPortfolioInfo }: PortfolioInfoFor
         </label>
         <input
           type="text"
-          name="titleName"
-          value={portfolioInfo.titleName}
+          name="ownerName"
+          value={portfolioInfo.ownerName}
           onChange={handleInputChange}
           className="border rounded-md px-3 py-2 w-full focus:outline-none focus:border-blue-500"
         />

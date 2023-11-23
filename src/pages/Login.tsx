@@ -1,8 +1,9 @@
 import { FormEvent, useState } from 'react'
 import { useAuth } from '../providers/AuthProvider'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { login } = useAuth()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -12,7 +13,7 @@ const Login = () => {
 
     try {
       await login(email, password)
-      // navigate('/')
+      navigate('/')
     } catch (err) {
       console.log(err)
     }
@@ -40,6 +41,7 @@ const Login = () => {
                 type="email"
                 autoComplete="email"
                 required
+                value={email}
                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -60,20 +62,19 @@ const Login = () => {
                 type="password"
                 autoComplete="current-password"
                 required
+                value={password}
                 className="block w-full rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
 
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
-            >
-              Sign in
-            </button>
-          </div>
+          <button
+            type="submit"
+            className="flex w-full justify-center rounded-md bg-red-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500"
+          >
+            Sign in
+          </button>
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Don&apos;t have an account?{' '}
@@ -84,13 +85,6 @@ const Login = () => {
           </p>
         </form>
       </div>
-
-      {/* <label>Username</label>
-        <input type="text" onChange={(e) => setUsername(e.target.value)} />
-        <label>Password</label>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <button>Login</button>
-        <p>Don&apos;t have an account? Register</p> */}
     </div>
   )
 }
