@@ -1,9 +1,8 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { RegisterDTO } from '../types/dto'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
 import * as yup from 'yup'
+import { RegisterDTO } from '../types/dto'
 
 interface RegisterFormValues {
   username: string
@@ -13,16 +12,8 @@ interface RegisterFormValues {
 }
 
 const Register = () => {
-  const navigate = useNavigate()
-  const [success, setSuccess] = useState(null)
-  const [error, setError] = useState(null)
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  })
-
-  const { username, email, password } = formData
+  const [success, setSuccess] = useState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const initialValues: RegisterFormValues = {
     username: '',
@@ -34,41 +25,37 @@ const Register = () => {
   const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
 
   const validationSchema = yup.object({
-    username: yup.string().min(3, 'Username must be at least 3 characters').required('username is required!'),
-    email: yup.string().email('Please enter a valid email address').required(),
-    password: yup.string().matches(PASSWORD_REGEX, 'Please enter a strong password').required(),
+    username: yup.string().min(3, 'Username must be at least 3 characters').required('Username is required!'),
+    email: yup.string().email('Please enter a valid email address').required('Email is required!'),
+    password: yup.string().matches(PASSWORD_REGEX, 'Please enter a strong password').required('Password is required!'),
     confirmPassword: yup
       .string()
       .required('Please confirm your password')
       .oneOf([yup.ref('password')], 'Passwords must match'),
   })
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values: RegisterFormValues) => {
     try {
       const registerData: RegisterDTO = {
-        username,
-        password,
-        email,
+        username: values.username,
+        password: values.password,
+        email: values.email,
       }
 
-      const response = await axios.post('http://localhost:5000/api/v1/register', registerData)
+      const response = await axios.post('http://localhost:8080/user/', registerData)
 
       console.log('Registration successful:', response.data)
-
-      setFormData({
-        username: '',
-        email: '',
-        password: '',
-      })
-      setError(null)
       setSuccess(response.data.message)
-      navigate('/login')
+      setError(null)
+      // Clear form values after successful registration
+      // navigate('/login');
     } catch (err) {
       if (axios.isAxiosError(err)) {
         if (err.response) setError(err.response.data.message)
         setSuccess(null)
       } else {
-        console.error('Registration error:', error)
+        console.error('Registration error:', err)
+        setError('Internal Server Error')
       }
     }
   }
@@ -99,7 +86,7 @@ const Register = () => {
                         type="text"
                         id="username"
                         name="username"
-                        placeholder="Username"
+                        placeholder="John"
                         className="block w-full bg-violet-100 rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                       <ErrorMessage name="username" component="div" />
@@ -166,7 +153,6 @@ const Register = () => {
             </div>
 
             <div className="mt-4 flex flex-col lg:flex-row items-center justify-center">
-              {/* <div className="w-full lg:w-1/2 mb-2 lg:mb-0"> */}
               <button
                 type="button"
                 className="flex w-auto justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
@@ -176,7 +162,6 @@ const Register = () => {
                 </svg>
                 Register with Github
               </button>
-              {/* </div> */}
             </div>
           </div>
         </div>
