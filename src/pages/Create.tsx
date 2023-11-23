@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FormEvent, useState } from 'react'
 import PortfolioInfoForm from '../components/FormCreate/PortfolioInfoForm'
 import TechStackForm from '../components/FormCreate/TechStackForm'
 import ProjectForm from '../components/FormCreate/ProjectForm'
@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { EducationDTO, PortfolioInfoDTO, ProjectDTO, SkillsDTO, WorkExperienceDTO } from '../types/dto'
 import EducationForm from '../components/FormCreate/EducationForm'
 import WorkExperienceForm from '../components/FormCreate/WorkExperienceForm'
+import usePortfolios from '../hooks/usePortfolios'
 
 const initialPortInfo = {
   portfolioName: '',
@@ -56,8 +57,9 @@ const initialWorkExperienceList = [
 
 const Create = () => {
   const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
+  const { createPortfolio } = usePortfolios()
 
-  const [selectedTechStack, setSelectedTechStack] = useState<SkillsDTO | null>(null)
+  const [selectedTechStack, setSelectedTechStack] = useState<SkillsDTO[]>([{ name: '' }])
   const TechStack: SkillsDTO[] = [
     { name: 'React' },
     { name: 'Vue.js' },
@@ -79,9 +81,21 @@ const Create = () => {
     console.table(portfolioInfo)
     console.table(educationList)
   }
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      // console.log(typeof newUrl, newComment, newRating)
+      // createContent(newUrl, newComment, newRating)
+      createPortfolio(portfolioInfo, selectedTechStack, projectList, educationList, workExperienceList)
+      console
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
     <div className="max-w-3xl mx-auto p-6">
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-4">
           <PortfolioInfoForm portfolioInfo={portfolioInfo} setPortfolioInfo={setPortfolioInfo} />
           <TechStackForm
@@ -98,7 +112,7 @@ const Create = () => {
         </div>
 
         <button
-          type="button"
+          type="submit"
           className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
           onClick={saveProjectData}
         >

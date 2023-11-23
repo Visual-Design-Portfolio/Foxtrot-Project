@@ -4,8 +4,8 @@ import { MultiSelect } from 'primereact/multiselect'
 import { SkillsDTO } from '../../types/dto'
 
 interface TechStackFormProps {
-  selectedTechStack: SkillsDTO | null
-  setSelectedTechStack: React.Dispatch<React.SetStateAction<SkillsDTO | null>>
+  selectedTechStack: SkillsDTO[]
+  setSelectedTechStack: React.Dispatch<React.SetStateAction<SkillsDTO[]>>
   TechStack: SkillsDTO[]
 }
 

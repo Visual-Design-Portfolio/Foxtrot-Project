@@ -18,6 +18,8 @@ interface EducationFormProps {
 }
 
 const EducationForm = ({ educationList, setEducationList }: EducationFormProps) => {
+
+  
   const handleEducationChange = (id: string, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const index = educationList.findIndex((education) => education.id === id)
     const updatedEducation = [...educationList] as any
