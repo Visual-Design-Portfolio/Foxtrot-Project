@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react'
 import { useAuth } from '../providers/AuthProvider'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const { login } = useAuth()
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -13,7 +13,7 @@ const Login = () => {
 
     try {
       await login(email, password)
-      // navigate('/')
+      navigate('/')
     } catch (err) {
       console.log(err)
     }
