@@ -1,5 +1,4 @@
 export const initialPortInfo = {
-  //อย่าลืมใส่ interface
   name: '',
   ownerName: '',
   picture: null,
@@ -34,8 +33,6 @@ export const initialWorkExperienceList = [
     endDate: new Date(),
   },
 ]
-
-// export default { initialPortInfo, initialProjectList, initialEducationList, initialWorkExperienceList }
 
 // use in ProjectForm
 

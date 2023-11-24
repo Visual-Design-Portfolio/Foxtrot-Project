@@ -81,7 +81,6 @@ const Login = () => {
             <a href="/register" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Register
             </a>
-            {/* <Link to="/register"><Link/> */}
           </p>
         </form>
       </div>

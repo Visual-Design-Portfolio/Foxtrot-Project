@@ -20,8 +20,6 @@ const MenuProps = {
   },
 }
 
-
-
 function getStyles(name: string, categoryList: readonly string[], theme: Theme) {
   return {
     fontWeight:
