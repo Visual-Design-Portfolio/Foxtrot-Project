@@ -1,17 +1,76 @@
 import React from 'react'
 import { ProjectDTO } from '../../types/dto'
+import { Theme, useTheme } from '@mui/material/styles'
+import { Box, Chip, FormControl, InputLabel, MenuItem, OutlinedInput, Select, SelectChangeEvent } from '@mui/material'
+import { categories, tags } from '../../utils/const'
 
 interface ProjectFormProps {
   projectList: ProjectDTO[]
   setProjectList: React.Dispatch<React.SetStateAction<ProjectDTO[]>>
 }
 
-const ProjectForm = ({ projectList, setProjectList }: ProjectFormProps) => {
-  const handleProjectChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const updatedProjects = [...projectList]
-    const key = e.target.name as keyof ProjectDTO
+const ITEM_HEIGHT = 48
+const ITEM_PADDING_TOP = 8
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+}
 
-    updatedProjects[index][key] = e.target.value
+
+
+function getStyles(name: string, categoryList: readonly string[], theme: Theme) {
+  return {
+    fontWeight:
+      categoryList.indexOf(name) === -1 ? theme.typography.fontWeightRegular : theme.typography.fontWeightMedium,
+  }
+}
+
+const ProjectForm = ({ projectList, setProjectList }: ProjectFormProps) => {
+  const theme = useTheme()
+
+  const handleProjectChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const updatedProjects = projectList.map((project, idx) => {
+      if (idx === index) {
+        return {
+          ...project,
+          [e.target.name]: e.target.value,
+        }
+      }
+      return project
+    })
+
+    setProjectList(updatedProjects)
+  }
+
+  const handleCategoryChange = (index: number, event: SelectChangeEvent<string[]>) => {
+    const { value } = event.target
+    const updatedProjects = projectList.map((project, idx) => {
+      if (idx === index) {
+        return {
+          ...project,
+          category: typeof value === 'string' ? value.split(',') : value,
+        }
+      }
+      return project
+    })
+    setProjectList(updatedProjects)
+  }
+
+  const handleTagChange = (index: number, event: SelectChangeEvent<string[]>) => {
+    const { value } = event.target
+    const updatedProjects = projectList.map((project, idx) => {
+      if (idx === index) {
+        return {
+          ...project,
+          tag: typeof value === 'string' ? value.split(',') : value,
+        }
+      }
+      return project
+    })
     setProjectList(updatedProjects)
   }
 
@@ -65,6 +124,61 @@ const ProjectForm = ({ projectList, setProjectList }: ProjectFormProps) => {
                   className="border rounded-md w-full px-3 py-2 focus:outline-none focus:border-blue-500"
                 />
               </div>
+
+              {/* Multi select */}
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="category-multiple-chip-label">Category</InputLabel>
+                <Select
+                  labelId="category-multiple-chip-label"
+                  id="category-multiple-chip"
+                  multiple
+                  value={project.category}
+                  onChange={(event) => handleCategoryChange(index, event)}
+                  input={<OutlinedInput id="category-multiple-chip" label="Chip" />}
+                  renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {categories.map((category) => (
+                    <MenuItem key={category} value={category} style={getStyles(category, categories, theme)}>
+                      {category}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+
+              <FormControl sx={{ m: 1, width: 300 }}>
+                <InputLabel id="tags-multiple-chip-label">Tag</InputLabel>
+                <Select
+                  labelId="tags-multiple-chip-label"
+                  id="tage-multiple-chip"
+                  multiple
+                  value={project.tag}
+                  onChange={(event) => handleTagChange(index, event)}
+                  input={<OutlinedInput id="tags-multiple-chip" label="Chip" />}
+                  renderValue={(selected) => (
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </Box>
+                  )}
+                  MenuProps={MenuProps}
+                >
+                  {tags.map((tag) => (
+                    <MenuItem key={tag} value={tag} style={getStyles(tag, categories, theme)}>
+                      {tag}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              {/* Multi select */}
+
               <div>
                 <label htmlFor={`linkProject_${index}`} className="block mb-1 font-medium">
                   Link Project

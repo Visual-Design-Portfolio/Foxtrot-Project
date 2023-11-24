@@ -6,47 +6,10 @@ import { EducationDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '.
 import EducationForm from '../components/FormCreate/EducationForm'
 import WorkExperienceForm from '../components/FormCreate/WorkExperienceForm'
 import usePortfolios from '../hooks/usePortfolios'
-
-const initialPortInfo = {
-  //อย่าลืมใส่ interface
-  name: '',
-  ownerName: '',
-  picture: null,
-}
-
-const initialProjectList = [
-  {
-    title: '',
-    detail: '',
-    linkProject: '',
-    linkGitRepo: '',
-    category: [],
-    tag: [],
-  },
-]
-const initialEducationList = [
-  {
-    school: '',
-    degree: '',
-    major: '',
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-]
-const initialWorkExperienceList = [
-  {
-    position: '',
-    employeeType: '',
-    companyName: '',
-    companyLocation: '',
-    startDate: new Date(),
-    endDate: new Date(),
-  },
-]
+import { initialEducationList, initialPortInfo, initialProjectList, initialWorkExperienceList } from '../utils/const'
 
 const Create = () => {
   const { createPortfolio } = usePortfolios()
-
   const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
   const [selectedTechStack, setSelectedTechStack] = useState<string[]>([])
   const [projectList, setProjectList] = useState<ProjectDTO[]>(initialProjectList)
@@ -73,11 +36,7 @@ const Create = () => {
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="flex flex-col space-y-4">
           <PortfolioInfoForm portfolioInfo={portfolioInfo} setPortfolioInfo={setPortfolioInfo} />
-          <TechStackForm
-            selectedTechStack={selectedTechStack}
-            setSelectedTechStack={setSelectedTechStack}
-            // TechStack={TechStack}
-          />
+          <TechStackForm selectedTechStack={selectedTechStack} setSelectedTechStack={setSelectedTechStack} />
         </div>
 
         <div className="flex flex-col space-y-4">
