@@ -13,7 +13,7 @@ const Login = () => {
 
     try {
       await login(email, password)
-      // navigate('/')
+      navigate('/')
     } catch (err) {
       console.log(err)
     }
@@ -43,6 +43,7 @@ const Login = () => {
                     name="email"
                     type="email"
                     required
+                    value={email}
                     placeholder="johnsmith@example.com"
                     className="block w-full bg-violet-100 rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     onChange={(e) => setEmail(e.target.value)}
@@ -65,6 +66,7 @@ const Login = () => {
                     autoComplete="current-password"
                     required
                     placeholder="********"
+                    value={password}
                     className="block w-full bg-violet-100 rounded-md border-0 py-1.5 pl-4 pr-20 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     onChange={(e) => setPassword(e.target.value)}
                   />
