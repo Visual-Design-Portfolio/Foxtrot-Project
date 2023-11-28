@@ -2,6 +2,7 @@ import { ReactNode, createContext, useContext, useState } from 'react'
 import { CredentialDTO, LoginDTO, RegisterDTO } from '../types/dto'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { API_HOST } from '../utils/api'
 
 interface IAuthProviderProps {
   children: ReactNode
@@ -40,7 +41,7 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
 
   const register = async (registerData: RegisterDTO) => {
     try {
-      const response = await axios.post('http://localhost:8080/user/', registerData)
+      const response = await axios.post(`${API_HOST}/user/`, registerData)
 
       console.log('Registration successful:', response.data)
       setSuccess(response.data.message)
@@ -50,7 +51,7 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
       if (axios.isAxiosError(err)) {
         if (err.response) setError(err.response.data.message)
         setSuccess(null)
-        navigate('/login');
+        navigate('/login')
       } else {
         console.error('Registration error:', err)
         setError('Internal Server Error')
@@ -62,7 +63,7 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
     const loginBody: LoginDTO = { email, password }
 
     try {
-      const res = await axios.post<CredentialDTO>('http://localhost:8080/auth/login', loginBody, {
+      const res = await axios.post<CredentialDTO>(`${API_HOST}/auth/login`, loginBody, {
         headers: { 'Content-Type': 'application/json' },
       })
 
