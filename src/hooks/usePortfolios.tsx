@@ -1,6 +1,7 @@
 import { EducationDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
 import { useAuth } from '../providers/AuthProvider'
 import axios from 'axios'
+import { API_HOST } from '../utils/api'
 
 const usePortfolios = () => {
   const { token } = useAuth()
@@ -45,7 +46,7 @@ const usePortfolios = () => {
 
     try {
       console.log(newPortfolioData)
-      await axios.post('http://localhost:8080/portfolio/', newPortfolioData, {
+      await axios.post(`${API_HOST}/portfolio/`, newPortfolioData, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
