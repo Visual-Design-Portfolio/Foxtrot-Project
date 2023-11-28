@@ -1,2 +1,1 @@
-export const API_HOST = 'http://localhost:8080'
-// import.meta.env.VITE_API_HOST
+export const API_HOST = import.meta.env.VITE_API_HOST || 'http://localhost:8080'
