@@ -31,7 +31,7 @@ const WorkExperienceForm = ({ workExperienceList, setWorkExperienceList }: WorkE
   }
 
   const handleDeleteWorkExperience = (index: number) => {
-    const updatedWorkExperience = workExperienceList.filter((workExperience, idx) => idx !== index)
+    const updatedWorkExperience = workExperienceList.filter((_workExperience, idx) => idx !== index)
     setWorkExperienceList(updatedWorkExperience)
   }
 
