@@ -143,7 +143,7 @@ const Navbar = () => {
               d="M11,15h2c0.552,0,1,0.448,1,1v4c0,0.552-0.448,1-1,1h-2c-0.552,0-1-0.448-1-1v-4	C10,15.448,10.448,15,11,15z"
             ></path>
           </svg>
-          LearnHub
+          Visual Portfolio
         </NavLink>
       </div>
       <div className="flex gap-16 pb-12 items-center text-pink-500">

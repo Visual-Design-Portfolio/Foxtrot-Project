@@ -86,7 +86,7 @@ const ProjectForm = ({ projectList, setProjectList }: ProjectFormProps) => {
   }
 
   const handleDeleteProject = (index: number) => {
-    const updatedProject = projectList.filter((project, idx) => idx !== index)
+    const updatedProject = projectList.filter((_project, idx) => (idx !== index))
     setProjectList(updatedProject)
   }
 
