@@ -1,8 +1,7 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import { useState } from 'react'
-import axios from 'axios'
 import * as yup from 'yup'
 import { RegisterDTO } from '../types/dto'
+import { useAuth } from '../providers/AuthProvider'
 
 interface RegisterFormValues {
   username: string
@@ -12,8 +11,7 @@ interface RegisterFormValues {
 }
 
 const Register = () => {
-  const [success, setSuccess] = useState<string | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const { success, error, register } = useAuth()
 
   const initialValues: RegisterFormValues = {
     username: '',
@@ -42,21 +40,9 @@ const Register = () => {
         email: values.email,
       }
 
-      const response = await axios.post('http://localhost:8080/user/', registerData)
-
-      console.log('Registration successful:', response.data)
-      setSuccess(response.data.message)
-      setError(null)
-      // Clear form values after successful registration
-      // navigate('/login');
+      await register(registerData)
     } catch (err) {
-      if (axios.isAxiosError(err)) {
-        if (err.response) setError(err.response.data.message)
-        setSuccess(null)
-      } else {
-        console.error('Registration error:', err)
-        setError('Internal Server Error')
-      }
+      console.error(err)
     }
   }
 
