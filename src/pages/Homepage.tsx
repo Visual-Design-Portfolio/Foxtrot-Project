@@ -21,7 +21,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="bg-gray-100 flex align-center justify-center py-10 w-100%">
+      <div className="bg-black flex align-center justify-center py-10 w-100%">
         <div className="animate-bounce bg-white dark:bg-slate-800 p-2 w-10 h-10 ring-1 ring-slate-900/5 dark:ring-slate-200/20 shadow-lg rounded-full flex items-center justify-center">
           <svg
             className="w-6 h-6 text-violet-500"
@@ -47,9 +47,9 @@ const Home = () => {
           </h2>
           <p className="text-2xl py-2">How it works</p>
           <div className="text-xl py-2">
-            <li>Step 1: Register for free</li>
-            <li>Step 2: Create your portfolio</li>
-            <li>Step 3: Get your own portfolio</li>
+            <p>Step 1: Register for free</p>
+            <p>Step 2: Create your portfolio</p>
+            <p>Step 3: Get your own portfolio</p>
           </div>
         </div>
       </div>
