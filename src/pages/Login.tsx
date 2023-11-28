@@ -120,7 +120,7 @@ const Login = () => {
               New Platform Visual Design Portfolio
             </h2>
             <div className="max-w-md text-center">
-              <img src="/src/assets/bglogin.svg" />
+              <img src="/bglogin.svg" />
             </div>
           </div>
         </div>

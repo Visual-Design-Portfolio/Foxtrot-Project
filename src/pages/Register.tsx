@@ -160,7 +160,7 @@ const Register = () => {
               Let’s make your Portfolio
             </h2>
             <div className="max-w-md text-center">
-              <img src="/src/assets/bgregister.svg" />
+              <img src="/bgregister.svg" />
             </div>
           </div>
         </div>
