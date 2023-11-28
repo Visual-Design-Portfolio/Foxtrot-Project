@@ -35,6 +35,7 @@ RUN pnpm build
 FROM nginx:latest
 
 COPY --from=builder /app/dist/ /usr/share/nginx/html
+COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
 
 # Expose the port that the application listens on.
 EXPOSE 80
