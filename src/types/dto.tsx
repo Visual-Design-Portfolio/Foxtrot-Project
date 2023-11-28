@@ -13,8 +13,9 @@ export interface RegisterDTO {
   email: string
 }
 
-export interface PortfolioDTO {
-  portfolioInfo: PortfolioInfoDTO
+// TODO: refactor these code since picture have nonsense type
+export interface PortfolioDetailsDTO extends Omit<PortfolioInfoDTO, "picture"> {
+  picture: string
   createdAt: Date
   updatedAt: Date
   education: EducationDTO[]

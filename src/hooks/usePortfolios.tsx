@@ -1,11 +1,19 @@
-import { EducationDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
-import { useAuth } from '../providers/AuthProvider'
 import axios from 'axios'
+import { useEffect, useState } from 'react'
+import { useAuth } from '../providers/AuthProvider'
+import { EducationDTO, PortfolioDetailsDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
 import { API_HOST } from '../utils/api'
 
 const usePortfolios = () => {
   const { token } = useAuth()
+  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDetailsDTO[]>([])
 
+  useEffect(() => {
+    axios
+    .get<PortfolioDetailsDTO[]>(`${API_HOST}/portfolio/`)
+    .then(r => setPersonalPortfolio(r.data))
+  }, [])
+  
   const createPortfolio = async (
     portfolioInfo: PortfolioInfoDTO,
     selectedTechStack: string[],
@@ -56,7 +64,7 @@ const usePortfolios = () => {
       throw new Error('Cannot create this protfolio')
     }
   }
-  return { createPortfolio }
+  return { createPortfolio, personalPortfolio }
 }
 
 export default usePortfolios
