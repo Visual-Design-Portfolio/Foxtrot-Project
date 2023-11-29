@@ -61,7 +61,7 @@ const Home = () => {
           </Carousel>
         </div>
         <div className="text-white xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
-          <h2 className="text-5xl font-bold bg-gradient-to-r from-violet-600 via-green-500 to-indigo-400 inline-block text-transparent">
+          <h2 className="text-5xl font-bold bg-gradient-to-r from-violet-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">
             Get started for free
           </h2>
           <p className="text-2xl py-2">How it works</p>

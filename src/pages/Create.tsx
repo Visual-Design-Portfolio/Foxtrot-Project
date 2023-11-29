@@ -22,8 +22,10 @@ import {
 import Check from '@mui/icons-material/Check'
 import useHandleForm from '../hooks/useHandleForm'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
+  const navigate = useNavigate()
   const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
       top: 22,
@@ -188,13 +190,14 @@ const Create = () => {
       setSelectedTechStack([])
       setWorkExperienceList(initialWorkExperienceList)
       setEducationList(initialEducationList)
+      navigate('/dashboard')
     } catch (err) {
       console.log(err)
     }
   }
 
   return (
-    <div className="flex flex-col justify-center w-full h-screen">
+    <div className="flex flex-col w-full min-h-screen">
       <h1 className="m-10 font-extrabold text-4xl  mx-auto text-center flex justify-center text-black ">
         Get Started on Your Portfolio
       </h1>

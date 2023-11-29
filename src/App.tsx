@@ -7,24 +7,26 @@ import Register from './pages/Register'
 import Homepage from './pages/Homepage'
 import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard'
-// import Footer from './components/Footer'
+import Footer from './components/Footer'
+import GuardedRoute from './guard/GuardedRoute'
+import { useAuth } from './providers/AuthProvider'
 
 function App() {
+  const { isLoggedIn } = useAuth()
   return (
     <div>
       <Navbar />
-
       <Routes>
+        <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Homepage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="re" element={<Re />} /> */}
-        <Route path="/create" element={<Create />} />
-
+        <Route element={<GuardedRoute isRouteAccessible={isLoggedIn} redirectRoute="/login" />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/create" element={<Create />} />
+        </Route>
         <Route path="/portfolio" element={<Template />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
