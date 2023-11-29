@@ -180,12 +180,14 @@ const Create = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    console.table(projectList)
-    console.table(selectedTechStack)
-    console.table(portfolioInfo)
-    console.table(educationList)
+
     try {
       await createPortfolio(portfolioInfo, selectedTechStack, projectList, educationList, workExperienceList)
+      setPortfolioInfo(initialPortInfo)
+      setProjectList(initialProjectList)
+      setSelectedTechStack([])
+      setWorkExperienceList(initialWorkExperienceList)
+      setEducationList(initialEducationList)
     } catch (err) {
       console.log(err)
     }

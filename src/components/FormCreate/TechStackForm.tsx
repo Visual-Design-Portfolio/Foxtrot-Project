@@ -34,6 +34,7 @@ const techStacks = [
   'Vue.js',
   'Node.js',
   'Express.js',
+  'MUI',
   'Django',
   'Flask',
   'Ruby on Rails',
@@ -57,6 +58,8 @@ const techStacks = [
   'Jira',
   'Docker',
   'Kubernetes',
+  'Prisma',
+  'Docker'
 ]
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {

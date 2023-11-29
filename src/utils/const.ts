@@ -53,7 +53,7 @@ export const categories = [
   'TypeScript',
   'jQuery',
   'Backend Development',
-  'Node.js',
+  'NodeJS',
   'Express.js',
   'Django',
   'Flask',
