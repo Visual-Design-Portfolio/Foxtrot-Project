@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Homepage from './pages/Homepage'
 import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -14,16 +15,14 @@ function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/" element={<Homepage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Homepage />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        {/* <Route path="re" element={<Re />} /> */}
         <Route path="/create" element={<Create />} />
-
         <Route path="/portfolio" element={<Template />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }
