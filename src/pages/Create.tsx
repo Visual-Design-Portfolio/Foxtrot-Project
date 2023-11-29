@@ -186,6 +186,8 @@ const Create = () => {
       setPortfolioInfo(initialPortInfo)
       setProjectList(initialProjectList)
       setSelectedTechStack([])
+      console.log('initialWorkExperienceList >>>>', initialWorkExperienceList)
+
       setWorkExperienceList(initialWorkExperienceList)
       setEducationList(initialEducationList)
     } catch (err) {
