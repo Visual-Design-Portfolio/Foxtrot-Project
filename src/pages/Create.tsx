@@ -194,7 +194,7 @@ const Create = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center w-full h-screen">
+    <div className="flex flex-col w-full min-h-screen">
       <h1 className="m-10 font-extrabold text-4xl  mx-auto text-center flex justify-center text-black ">
         Get Started on Your Portfolio
       </h1>
