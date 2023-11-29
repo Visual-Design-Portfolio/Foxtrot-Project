@@ -19,6 +19,8 @@
     "@types/uuid": "^9.0.7",
     "@types/yup": "^0.32.0",
     "axios": "^1.6.2",
+    "flowbite": "^2.2.0",
+    "flowbite-react": "^0.7.0",
     "formik": "^2.4.5",
     "framer-motion": "^10.16.5",
     "primereact": "^10.1.1",

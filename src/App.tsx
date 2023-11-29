@@ -7,6 +7,7 @@ import Register from './pages/Register'
 import Homepage from './pages/Homepage'
 import Navbar from './components/Navbar'
 import Dashboard from './pages/Dashboard'
+// import Footer from './components/Footer'
 
 function App() {
   return (
