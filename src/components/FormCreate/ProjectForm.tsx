@@ -124,7 +124,7 @@ const ProjectForm = ({ projectList, setProjectList }: ProjectFormProps) => {
               </div>
 
               {/* Multi select */}
-              <FormControl sx={{ m: 1, width: 300 }}>
+              <FormControl sx={{ m: 1, width: 1 }}>
                 <InputLabel id="category-multiple-chip-label">Category</InputLabel>
                 <Select
                   labelId="category-multiple-chip-label"
@@ -150,7 +150,7 @@ const ProjectForm = ({ projectList, setProjectList }: ProjectFormProps) => {
                 </Select>
               </FormControl>
 
-              <FormControl sx={{ m: 1, width: 300 }}>
+              <FormControl sx={{ m: 1, width: 1 }}>
                 <InputLabel id="tags-multiple-chip-label">Tag</InputLabel>
                 <Select
                   labelId="tags-multiple-chip-label"
