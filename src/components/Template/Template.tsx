@@ -1,19 +1,25 @@
-import Main from './Main'
+import TechStackSection from './TechStackSection'
 import './Template.module.css'
-import NavbarTemplate from './Navbar/NavbarTemplate'
+// import NavbarTemplate from './Navbar/NavbarTemplate'
 import Hero from './Hero'
+import ProjectsSection from './ProjectsSection'
+import NavbarSection from './Navbar/NavbarSection'
 
 const Template = () => {
   return (
-    <div className="bg-[#0c0c1d] text-slate-50">
+    <main className="bg-[#121212] text-slate-50">
       <section id="Home">
-        <NavbarTemplate />
+        {/* <NavbarTemplate /> */}
+        <NavbarSection />
         <Hero />
       </section>
-      <section id="Tech Stack">
-        <Main />
+      <section id="Tech Stack" className="">
+        <TechStackSection />
       </section>
-    </div>
+      <section id="Project" className="">
+        <ProjectsSection />
+      </section>
+    </main>
   )
 }
 
