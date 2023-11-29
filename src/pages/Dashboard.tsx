@@ -1,4 +1,9 @@
+import Table from "../components/PortfolioTable/Table"
+import usePortfolios from "../hooks/usePortfolios"
+
 const Dashboard = () => {
+  const {personalPortfolio} = usePortfolios()
+
   return (
     <>
       <div className="antialiased bg-black w-full min-h-screen text-slate-300 relative py-4">
@@ -150,6 +155,9 @@ const Dashboard = () => {
                 </a>
               </div>
             </div>
+          </div>
+          <div className="col-span-8">
+            <Table data={personalPortfolio} />
           </div>
         </div>
       </div>
