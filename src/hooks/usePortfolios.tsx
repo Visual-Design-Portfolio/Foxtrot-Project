@@ -8,7 +8,7 @@ import { API_HOST } from '../utils/api'
 const usePortfolios = () => {
   const navigate = useNavigate()
   const { token, userInfo } = useAuth()
-  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDTO[]>([])  
+  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDTO[]>([])
 
   useEffect(() => {
     if (userInfo) {
@@ -21,8 +21,6 @@ const usePortfolios = () => {
           },
         })
         .then((r) => setPersonalPortfolio(r.data))
-    } else {
-      navigate('/login')
     }
   }, [userInfo, token, navigate])
 
