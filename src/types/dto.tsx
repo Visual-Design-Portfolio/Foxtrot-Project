@@ -65,7 +65,7 @@ export interface RegisterDTO {
 // }
 
 // TODO: refactor these code since picture have nonsense type
-export interface PortfolioDetailsDTO extends Omit<PortfolioInfoDTO, "picture"> {
+export interface PortfolioDetailsDTO extends Omit<PortfolioInfoDTO, 'picture'> {
   picture: string
   createdAt: Date
   updatedAt: Date
@@ -113,7 +113,7 @@ export interface ProjectDTO {
   linkGitRepo: string
 }
 
-// 
+//
 
 export interface PortfolioDTO {
   _id: string
@@ -143,8 +143,8 @@ export interface WorkExperience {
   employeeType: string
   companyName: string
   companyLocation: string
-  startDate: string
-  endDate: string
+  startDate: Date
+  endDate: Date
   _id: string
 }
 

@@ -1,21 +1,14 @@
 import { motion, useAnimation } from 'framer-motion'
-import React from 'react'
 
 interface EducationCardProps {
   school: string
   degree: string
   major: string
-  startDate: string
-  endDate: string
+  startDate: Date
+  endDate: Date
 }
 
-const EducationCard: React.FC<EducationCardProps> = ({
-  school,
-  degree,
-  major,
-  startDate,
-  endDate,
-}: EducationCardProps) => {
+const EducationCard = ({ school, degree, major, startDate, endDate }: EducationCardProps) => {
   const controls = useAnimation()
 
   const handleHoverStart = () => {
@@ -25,6 +18,9 @@ const EducationCard: React.FC<EducationCardProps> = ({
   const handleHoverEnd = () => {
     controls.start({ scale: 1 })
   }
+
+  const startYear = new Date(startDate)
+  const endYear = new Date(endDate)
 
   return (
     <motion.div
@@ -43,7 +39,7 @@ const EducationCard: React.FC<EducationCardProps> = ({
         </div>
         <div className="w-2/5 flex flex-col items-end">
           <span className="text-md font-semibold text-purple-100">
-            {startDate} - {endDate}
+            {startYear.getFullYear()} - {endYear.getFullYear()}
           </span>
           <span className="text-lg font-semibold text-purple-400">{major}</span>
         </div>
