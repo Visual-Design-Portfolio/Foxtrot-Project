@@ -1,44 +1,42 @@
 import { useRef } from 'react'
 import EducationCard from './EducationCard'
 import { motion, useInView } from 'framer-motion'
+import { EducationDTO } from '../../types/dto'
 
-interface Education {
-  id: number
-  school: string
-  degree: string
-  major: string
-  startDate: string
-  endDate: string
+
+
+// const educationsData: Education[] = [
+//   {
+//     id: 1,
+//     school: 'Harvard University',
+//     degree: 'Bachelor of Arts',
+//     major: 'Economics',
+//     startDate: '2016',
+//     endDate: '2020',
+//   },
+//   {
+//     id: 2,
+//     school: 'Stanford University',
+//     degree: 'Master of Science',
+//     major: 'Computer Engineering',
+//     startDate: '2018',
+//     endDate: '2020',
+//   },
+//   {
+//     id: 3,
+//     school: 'Massachusetts Institute of Technology (MIT)',
+//     degree: 'Ph.D. in Physics',
+//     major: 'Quantum Mechanics',
+//     startDate: '2020',
+//     endDate: '2025',
+//   },
+// ]
+
+interface EducationProps {
+  educationData: EducationDTO[]
 }
 
-const educationsData: Education[] = [
-  {
-    id: 1,
-    school: 'Harvard University',
-    degree: 'Bachelor of Arts',
-    major: 'Economics',
-    startDate: '2016',
-    endDate: '2020',
-  },
-  {
-    id: 2,
-    school: 'Stanford University',
-    degree: 'Master of Science',
-    major: 'Computer Engineering',
-    startDate: '2018',
-    endDate: '2020',
-  },
-  {
-    id: 3,
-    school: 'Massachusetts Institute of Technology (MIT)',
-    degree: 'Ph.D. in Physics',
-    major: 'Quantum Mechanics',
-    startDate: '2020',
-    endDate: '2025',
-  },
-]
-
-const EducationSection = () => {
+const EducationSection = ({educationData}: EducationProps) => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   const titleVariants = {
@@ -74,7 +72,7 @@ const EducationSection = () => {
           Education
         </motion.h1>
         <ul ref={ref} className="mt-20 flex flex-col gap-16 px-40">
-          {educationsData.map((education, index) => (
+          {educationData.map((education, index) => (
             <motion.li
               key={index}
               variants={textVariants}
@@ -83,7 +81,6 @@ const EducationSection = () => {
               transition={{ delay: index * staggerDelay }}
             >
               <EducationCard
-                key={education.id}
                 school={education.school}
                 degree={education.degree}
                 major={education.major}

@@ -1,5 +1,5 @@
 import EducationSection from '../Template/EducationSection'
-import Experience from '../Template/Experience'
+import ExperienceSectionExample from './ExperienceSectionExample'
 import HeroSectionExample from './HeroSectionExample'
 import NavbarSectionExample from './NavbarExample/NavbarSectionExample'
 import ProjectSectionExample from './ProjectSectionExample'
@@ -20,7 +20,7 @@ const TemplateExample = () => {
         <ProjectSectionExample />
       </section>
       <section id="workExperience" className="my-12">
-        <Experience />
+        <ExperienceSectionExample />
       </section>
       <section id="Education" className="">
         <EducationSection />

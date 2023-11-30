@@ -15,6 +15,7 @@ const Template = () => {
   const skills = portfolio?.skill || ['I am constantly developing my skillset']
   const projectsData = portfolio?.project || []
   const experienceData = portfolio?.workExperience || []
+  const educationData = portfolio?.education || []
   return (
     <main className="bg-[#121212] text-slate-50">
       <section id="Home">
@@ -31,7 +32,7 @@ const Template = () => {
         <Experience experienceData ={experienceData} />
       </section>
       <section id="Education" className="">
-        <EducationSection />
+        <EducationSection educationData={educationData} />
       </section>
     </main>
   )

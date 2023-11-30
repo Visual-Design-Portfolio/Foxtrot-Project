@@ -7,6 +7,9 @@ type ExperienceCardProps = {
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
+  const startDate = new Date(experience.startDate)
+  const endDate = new Date(experience.endDate)
+
   return (
     <VerticalTimelineElement
       className="vertical-timeline-element--work"
@@ -15,7 +18,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
         color: '#ffff',
       }}
       contentArrowStyle={{ borderRight: '7px solid  #fff' }}
-      date={`${experience.startDate} - ${experience.endDate}`}
+      date={`${startDate.getFullYear()} - ${endDate.getFullYear()}`}
       iconStyle={{
         background: 'linear-gradient(to right, rgb(134, 239, 172), rgb(59, 130, 246), rgb(147, 51, 234))',
         color: '#030303',
