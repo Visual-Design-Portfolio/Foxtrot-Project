@@ -39,7 +39,6 @@ const techStacks = [
   'Firebase',
   'Docker',
   'Prisma',
-  'Docker',
 ]
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
