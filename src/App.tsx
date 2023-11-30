@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import Template from './components/Template/Template'
 import Create from './pages/Create'
@@ -12,22 +12,28 @@ import GuardedRoute from './guard/GuardedRoute'
 import { useAuth } from './providers/AuthProvider'
 
 function App() {
+  const location = useLocation()
   const { isLoggedIn } = useAuth()
+  const isShowNavbar = location.pathname === ('/' || '/login' || '/register' || '/dashboard' || '/create')
+
   return (
-    <div>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route element={<GuardedRoute isRouteAccessible={isLoggedIn} redirectRoute="/login" />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/create" element={<Create />} />
-        </Route>
-        <Route path="/portfolio" element={<Template />} />
-      </Routes>
-      <Footer />
-    </div>
+    <>
+      {isShowNavbar ? <Navbar /> : null}
+      <div>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+
+          <Route element={<GuardedRoute isRouteAccessible={isLoggedIn} redirectRoute="/login" />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/create" element={<Create />} />
+          </Route>
+          <Route path="/template" element={<Template />} />
+        </Routes>
+        {isShowNavbar ? <Footer /> : null}
+      </div>
+    </>
   )
 }
 

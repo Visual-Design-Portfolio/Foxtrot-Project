@@ -1,15 +1,15 @@
 import TechStackSection from './TechStackSection'
 import './Template.module.css'
-// import NavbarTemplate from './Navbar/NavbarTemplate'
 import Hero from './Hero'
 import ProjectsSection from './ProjectsSection'
 import NavbarSection from './Navbar/NavbarSection'
+import Experience from './Experience'
+import EducationSection from './EducationSection'
 
 const Template = () => {
   return (
     <main className="bg-[#121212] text-slate-50">
       <section id="Home">
-        {/* <NavbarTemplate /> */}
         <NavbarSection />
         <Hero />
       </section>
@@ -18,6 +18,12 @@ const Template = () => {
       </section>
       <section id="Project" className="">
         <ProjectsSection />
+      </section>
+      <section id="workExperience">
+        <Experience />
+      </section>
+      <section id="Education">
+        <EducationSection />
       </section>
     </main>
   )

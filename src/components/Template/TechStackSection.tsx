@@ -83,14 +83,6 @@ const TechStackSection = () => {
           {techStack.map((stack, index) => (
             <motion.li
               key={index}
-              // variants={fadeInAnimationsVariants}
-              // initial="initial"
-              // animate="animate"
-              // whileInView="animate"
-              // viewport={{
-              //   once: false,
-              // }}
-              // custom={index}
               ref={ref}
               initial="hidden"
               variants={imageVariants}

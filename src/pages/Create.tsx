@@ -6,25 +6,30 @@ import { EducationDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '.
 import EducationForm from '../components/FormCreate/EducationForm'
 import WorkExperienceForm from '../components/FormCreate/WorkExperienceForm'
 import usePortfolios from '../hooks/usePortfolios'
-import { initialEducationList, initialPortInfo, initialProjectList, initialWorkExperienceList } from '../utils/const'
 import {
-  styled,
-  StepConnector,
-  stepConnectorClasses,
-  StepIconProps,
-  Button,
-  Stack,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography,
-} from '@mui/material'
+  ColorlibConnector,
+  ColorlibStepIconRoot,
+  initialEducationList,
+  initialPortInfo,
+  initialProjectList,
+  initialWorkExperienceList,
+} from '../utils/const'
+import { StepIconProps, Button, Stack, Step, StepLabel, Stepper, Typography } from '@mui/material'
 import Check from '@mui/icons-material/Check'
 import useHandleForm from '../hooks/useHandleForm'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
+<<<<<<< HEAD
+  const { steps, activeStep, complete, handleBack, handleNext, isLastStep } = useHandleForm()
+  const { createPortfolio } = usePortfolios()
+  const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
+  const [selectedTechStack, setSelectedTechStack] = useState<string[]>([])
+  const [projectList, setProjectList] = useState<ProjectDTO[]>(initialProjectList)
+  const [educationList, setEducationList] = useState<EducationDTO[]>(initialEducationList)
+  const [workExperienceList, setWorkExperienceList] = useState<WorkExperienceDTO[]>(initialWorkExperienceList)
+=======
   const navigate = useNavigate()
   const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
     [`&.${stepConnectorClasses.alternativeLabel}`]: {
@@ -68,6 +73,7 @@ const Create = () => {
       backgroundImage: 'linear-gradient( 95deg,rgb(131,111,255) 0%,rgb(112,71,247) 50%,rgb(77,51,214) 100%)',
     }),
   }))
+>>>>>>> main
 
   function ColorlibStepIcon(props: StepIconProps) {
     const { active, completed, className } = props
@@ -87,14 +93,6 @@ const Create = () => {
       </ColorlibStepIconRoot>
     )
   }
-
-  const { steps, activeStep, complete, handleBack, handleNext, isLastStep } = useHandleForm()
-  const { createPortfolio } = usePortfolios()
-  const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
-  const [selectedTechStack, setSelectedTechStack] = useState<string[]>([])
-  const [projectList, setProjectList] = useState<ProjectDTO[]>(initialProjectList)
-  const [educationList, setEducationList] = useState<EducationDTO[]>(initialEducationList)
-  const [workExperienceList, setWorkExperienceList] = useState<WorkExperienceDTO[]>(initialWorkExperienceList)
 
   const PageDisplay = (step: number) => {
     switch (step) {
@@ -188,6 +186,7 @@ const Create = () => {
       setPortfolioInfo(initialPortInfo)
       setProjectList(initialProjectList)
       setSelectedTechStack([])
+
       setWorkExperienceList(initialWorkExperienceList)
       setEducationList(initialEducationList)
       navigate('/dashboard')
