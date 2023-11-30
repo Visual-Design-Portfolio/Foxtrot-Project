@@ -1,22 +1,18 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../providers/AuthProvider'
 import { EducationDTO, PortfolioDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
 import { API_HOST } from '../utils/api'
-import { jwtDecode } from 'jwt-decode'
 
-interface MyToken {
-  userId: string
-  exp: number
-}
 const usePortfolios = () => {
-  const { token } = useAuth()
-  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDTO[]>([])
-  const decoded = jwtDecode<MyToken>(token || '')
-  const userId = decoded.userId
+  const navigate = useNavigate()
+  const { token, userInfo } = useAuth()
+  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDTO[]>([])  
 
   useEffect(() => {
-    if (token) {
+    if (userInfo) {
+      const { _id: userId } = userInfo
       axios
         .get<PortfolioDTO[]>(`${API_HOST}/portfolio/find/${userId}`, {
           headers: {
@@ -25,8 +21,10 @@ const usePortfolios = () => {
           },
         })
         .then((r) => setPersonalPortfolio(r.data))
+    } else {
+      navigate('/login')
     }
-  }, [userId])
+  }, [userInfo, token, navigate])
 
   const createPortfolio = async (
     portfolioInfo: PortfolioInfoDTO,

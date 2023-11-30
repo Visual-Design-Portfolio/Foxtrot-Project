@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom'
-import usePortfolios from '../hooks/usePortfolios'
-import Table from '../components/PortfolioTable/Table'
-import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import Navbar from '../components/Navbar'
+import Table from '../components/PortfolioTable/Table'
+import usePortfolios from '../hooks/usePortfolios'
+import { useAuth } from '../providers/AuthProvider'
 
 const Dashboard = () => {
   const { personalPortfolio } = usePortfolios()
+  const { userInfo } = useAuth()
 
   return (
     <>
@@ -32,7 +34,7 @@ const Dashboard = () => {
                 </svg>
               </div>
               <div>
-                <p className="font-medium group-hover:text-indigo-400 leading-4">Jim Smith</p>
+                <p className="font-medium group-hover:text-indigo-400 leading-4">{userInfo?.username}</p>
               </div>
             </a>
           </div>
