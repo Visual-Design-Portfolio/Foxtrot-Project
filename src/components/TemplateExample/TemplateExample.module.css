@@ -1,0 +1,12 @@
+main {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
+  }
+  
+  section {
+    height: 100vh;
+    /* scroll-snap-align: center; */
+  }

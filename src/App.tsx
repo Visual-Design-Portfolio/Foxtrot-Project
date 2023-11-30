@@ -10,6 +10,7 @@ import Dashboard from './pages/Dashboard'
 import Footer from './components/Footer'
 import GuardedRoute from './guard/GuardedRoute'
 import { useAuth } from './providers/AuthProvider'
+import TemplateExample from './components/TemplateExample/TemplateExample'
 
 function App() {
   const location = useLocation()
@@ -30,7 +31,7 @@ function App() {
             <Route path="/create" element={<Create />} />
           </Route>
           <Route path="/template/:id" element={<Template />} />
-          <Route path="/template" element={<Template />} />
+          <Route path="/template" element={<TemplateExample />} />
         </Routes>
         {isShowNavbar ? <Footer /> : null}
       </div>
