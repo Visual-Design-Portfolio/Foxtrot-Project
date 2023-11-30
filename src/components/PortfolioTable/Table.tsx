@@ -1,44 +1,25 @@
-import { PortfolioDetailsDTO } from '../../types/dto'
+import { Link } from 'react-router-dom'
+import { PortfolioDTO } from '../../types/dto'
 
 export interface ITableProps {
-  data: PortfolioDetailsDTO[]
+  data: PortfolioDTO[]
 }
 
-const Table = ({ data }: ITableProps) => (
-  <table className="table-fixed w-full">
-    <thead>
-      <tr>
-        <th>Portfolio name</th>
-        <th>Owner</th>
-        <th>Picture</th>
-        <th>Created at</th>
-        <th>Updated at</th>
-        {/* <th>Education</th> */}
-        {/* <th>Work experience</th> */}
-      </tr>
-    </thead>
-    <tbody>
-      {data.map(({ 
-      createdAt,
-      // education,
-      name,
-      ownerName,
-      picture,
-      updatedAt,
-      // workExperience,
-     }, i) => (
-        <tr key={`portfolio-row-${i}`}>
-          {/* <td>{JSON.stringify(education)}</td> */}
-          <td>{name}</td>
-          <td>{ownerName}</td>
-          <td><img src={picture} alt="port picture" /></td>
-          <td>{`${createdAt}`}</td>
-          <td>{`${updatedAt}`}</td>
-          {/* <td>{JSON.stringify(workExperience)}</td> */}
-        </tr>
+const Table = ({ data }: ITableProps) => {
+  const handleClick = (id: string) => {
+    console.log(`clicked ${id}`)
+  }
+  return (
+    <div>
+      {data.map((portfolio, index) => (
+        <div key={index} className="w-36 h-36 bg-purple-800 mb-4" onClick={() => handleClick(portfolio._id)}>
+          <Link to={`/template/${portfolio._id}`}>
+            <h1>{portfolio.name}</h1>
+          </Link>
+        </div>
       ))}
-    </tbody>
-  </table>
-)
+    </div>
+  )
+}
 
 export default Table

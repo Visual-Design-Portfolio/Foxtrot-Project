@@ -4,21 +4,25 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-const TechStackSection = () => {
-  const techStack = [
-    'HTML5',
-    'CSS3',
-    'JavaScript',
-    'TypeScript',
-    'React',
-    'Tailwind',
-    'MUI',
-    'NodeJS',
-    'ExpressJS',
-    'MySQL',
-    'Prisma',
-    'Docker',
-  ]
+interface TechStackSection {
+  skills: string[]
+}
+
+const TechStackSection = ({ skills }: TechStackSection) => {
+  // const techStack = [
+  //   'HTML5',
+  //   'CSS3',
+  //   'JavaScript',
+  //   'TypeScript',
+  //   'React',
+  //   'Tailwind',
+  //   'MUI',
+  //   'NodeJS',
+  //   'ExpressJS',
+  //   'MySQL',
+  //   'Prisma',
+  //   'Docker',
+  // ]
   const techStackImages: { [key: string]: string } = {
     HTML5: '/TeckStack/html.png',
     CSS3: '/TeckStack/css.png',
@@ -80,7 +84,7 @@ const TechStackSection = () => {
           </motion.h1>
         </motion.div>
         <ul className="max-w-4xl flex gap-10 justify-center items-center flex-wrap xl:mx-0 mx-4">
-          {techStack.map((stack, index) => (
+          {skills.map((stack, index) => (
             <motion.li
               key={index}
               ref={ref}
@@ -90,7 +94,11 @@ const TechStackSection = () => {
               custom={index}
               transition={{ delay: index * animationDelay }}
             >
-              <img src={techStackImages[stack]} style={{ width: '100px', height: '100px', margin: '5px' }} />
+              {techStackImages[stack] ? (
+                <img src={techStackImages[stack]} style={{ width: '100px', height: '100px', margin: '5px' }} />
+              ) : (
+                <h1 className="text-4xl">{stack}</h1>
+              )}
             </motion.li>
           ))}
         </ul>

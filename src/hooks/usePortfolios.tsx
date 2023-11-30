@@ -1,19 +1,33 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { useAuth } from '../providers/AuthProvider'
-import { EducationDTO, PortfolioDetailsDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
+import { EducationDTO, PortfolioDTO, PortfolioInfoDTO, ProjectDTO, WorkExperienceDTO } from '../types/dto'
 import { API_HOST } from '../utils/api'
+import { jwtDecode } from 'jwt-decode'
 
+interface MyToken {
+  userId: string
+  exp: number
+}
 const usePortfolios = () => {
   const { token } = useAuth()
-  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDetailsDTO[]>([])
+  const [personalPortfolio, setPersonalPortfolio] = useState<PortfolioDTO[]>([])
+  const decoded = jwtDecode<MyToken>(token || '')
+  const userId = decoded.userId
 
   useEffect(() => {
-    axios
-    .get<PortfolioDetailsDTO[]>(`${API_HOST}/portfolio/`)
-    .then(r => setPersonalPortfolio(r.data))
-  }, [])
-  
+    if (token) {
+      axios
+        .get<PortfolioDTO[]>(`${API_HOST}/portfolio/portfolios/${userId}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((r) => setPersonalPortfolio(r.data))
+    }
+  }, [userId])
+
   const createPortfolio = async (
     portfolioInfo: PortfolioInfoDTO,
     selectedTechStack: string[],
