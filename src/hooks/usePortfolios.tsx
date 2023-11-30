@@ -18,7 +18,7 @@ const usePortfolios = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get<PortfolioDTO[]>(`${API_HOST}/portfolio/portfolios/${userId}`, {
+        .get<PortfolioDTO[]>(`${API_HOST}/portfolio/find/${userId}`, {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
