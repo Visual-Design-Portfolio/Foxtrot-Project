@@ -20,16 +20,16 @@ const Template = () => {
         <NavbarSection />
         <Hero ownerName={ownerName} />
       </section>
-      <section id="Tech Stack" className="">
-        <TechStackSection skills = {skills} />
+      <section id="Tech Stack" className="my-12">
+        <TechStackSection skills={skills} />
       </section>
-      <section id="Project" className="">
+      <section id="Project" className="my-12">
         <ProjectsSection projectsData={projectsData} />
       </section>
-      <section id="workExperience">
+      <section id="workExperience" className="my-12">
         <Experience />
       </section>
-      <section id="Education">
+      <section id="Education" className="my-12">
         <EducationSection />
       </section>
     </main>
