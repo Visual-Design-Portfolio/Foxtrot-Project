@@ -24,7 +24,7 @@ const sliderVariants = {
     transition: {
       repeat: Infinity,
       repeatType: 'mirror' as const,
-      duration: 20,
+      duration: 5,
     },
   },
 }
@@ -52,7 +52,7 @@ const Hero = () => {
           </motion.h1>
           <motion.h2 variants={textVariants} className="md:text-4xl lg:text-6xl xl:text-7xl text-2xl font-extrabold  ">
             <Typed
-              strings={['Web Developer', 'Full Stack Developer', 'Font End Developer', 'Back End Developer']}
+              strings={['Web Developer', 'Full Stack Developer', 'Front End Developer', 'Back End Developer']}
               typeSpeed={80}
               backSpeed={80}
               loop

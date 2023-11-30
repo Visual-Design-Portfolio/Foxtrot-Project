@@ -59,7 +59,7 @@ const techStacks = [
   'Docker',
   'Kubernetes',
   'Prisma',
-  'Docker'
+  'Docker',
 ]
 
 function getStyles(name: string, personName: readonly string[], theme: Theme) {
@@ -81,7 +81,7 @@ const TechStackForm = ({ selectedTechStack, setSelectedTechStack }: TechStackFor
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 1 }}>
         <InputLabel id="techStack-multiple-chip-label">Tech Stack</InputLabel>
         <Select
           labelId="techStack-multiple-chip-label"

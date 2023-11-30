@@ -29,12 +29,10 @@ export const useAuth = () => {
   return context
 }
 
-const token = localStorage.getItem('token')
-const user = localStorage.getItem('email')
-
 const AuthProvider = ({ children }: IAuthProviderProps) => {
+  const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
   const [isLoggedIn, setIsLoggedin] = useState<boolean>(!!token)
-  const [email, setEmail] = useState<string | null>(user)
+  const [email, setEmail] = useState<string | null>(localStorage.getItem('email'))
   const [success, setSuccess] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
@@ -69,6 +67,7 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
 
       localStorage.setItem('token', res.data.accessToken)
       localStorage.setItem('email', email)
+      setToken(res.data.accessToken)
       setIsLoggedin(true)
       setEmail(email)
     } catch (err) {
