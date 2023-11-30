@@ -13,7 +13,7 @@ const TemplateExample = () => {
         <NavbarSectionExample />
         <HeroSectionExample />
       </section>
-      <section id="Tech Stack" className="my-12">
+      <section id="Tech Stack" className="">
         <TechStackSectionExample />
       </section>
       <section id="Project" className="my-12">

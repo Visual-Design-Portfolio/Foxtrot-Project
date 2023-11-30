@@ -20,7 +20,7 @@ const Template = () => {
         <NavbarSection />
         <Hero ownerName={ownerName} />
       </section>
-      <section id="Tech Stack" className="my-12">
+      <section id="Tech Stack" className="">
         <TechStackSection skills={skills} />
       </section>
       <section id="Project" className="my-12">
