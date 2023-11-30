@@ -9,8 +9,9 @@ interface EducationFormProps {
 const EducationForm = ({ educationList, setEducationList }: EducationFormProps) => {
   const handleEducationChange = (index: number, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const updatedEducation = [...educationList]
-    const key = e.target.name as keyof EducationDTO;
+    const key = e.target.name as keyof EducationDTO
     if (key === 'startDate' || key === 'endDate') {
+      if (e.target.value === '') return
       updatedEducation[index][key] = new Date(e.target.value)
     } else {
       updatedEducation[index][key] = e.target.value

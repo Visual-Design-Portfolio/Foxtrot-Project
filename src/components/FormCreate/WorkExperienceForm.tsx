@@ -11,6 +11,7 @@ const WorkExperienceForm = ({ workExperienceList, setWorkExperienceList }: WorkE
     const updatedWorkExperience = [...workExperienceList]
     const key = e.target.name as keyof WorkExperienceDTO
     if (key === 'startDate' || key === 'endDate') {
+      if (e.target.value === '') return
       updatedWorkExperience[index][key] = new Date(e.target.value)
     } else {
       updatedWorkExperience[index][key] = e.target.value
