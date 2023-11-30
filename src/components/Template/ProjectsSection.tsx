@@ -9,14 +9,6 @@ interface ProjectProps {
   projectsData: ProjectDTO[]
 }
 
-// title: string
-//   detail: string
-//   picture?: string
-//   category: string[]
-//   tag: string[]
-//   linkProject: string
-//   linkGitRepo: string
-
 const ProjectsSection = ({ projectsData }: ProjectProps) => {
   const [tag, setTag] = useState<string>('Frontend')
   const ref = useRef(null)
@@ -40,7 +32,7 @@ const ProjectsSection = ({ projectsData }: ProjectProps) => {
         <ProjectTag onClick={handleTagChange} name="Frontend" isSelected={tag === 'Frontend'} />
         <ProjectTag onClick={handleTagChange} name="Backend" isSelected={tag === 'Backend'} />
       </div>
-      <ul ref={ref} className="grid md:grid-cols-3 gap-8 md:gap-12">
+      <ul ref={ref} className="flex justify-center gap-10 mt-10">
         {projectData.map((project, index) => (
           <motion.li
             key={index}
@@ -55,6 +47,7 @@ const ProjectsSection = ({ projectsData }: ProjectProps) => {
               description={project.detail}
               projectUrl={project.linkProject}
               gitUrl={project.linkGitRepo}
+              tag={project.tag}
               // previewUrl={project.previewUrl}
             />
           </motion.li>
