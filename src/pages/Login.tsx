@@ -25,7 +25,7 @@ const Login = () => {
       <Navbar />
       <div className="flex h-screen">
         {/* Left Pane */}
-        <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+        <div className="lg:flex w-full lg:w-1/2 items-center justify-center flex-1 bg-white text-black">
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <h2 className="mt-2 text-center text-3xl font-bold leading-9 tracking-tight text-gray-900">LOGIN</h2>
@@ -117,7 +117,7 @@ const Login = () => {
         </div>
 
         {/* Right Pane */}
-        <div className="w-full bg-black lg:w-1/2 flex items-center justify-center">
+        <div className="hidden lg:flex bg-black w-1/2 flex items-center justify-center">
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <h2 className="py-5 mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-white">
