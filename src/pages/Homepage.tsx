@@ -1,6 +1,10 @@
 import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useAuth } from '../providers/AuthProvider'
+import { Carousel } from 'flowbite-react'
 
 const Home = () => {
+  const { isLoggedIn } = useAuth()
   return (
     <>
       <div className="bg-black lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
@@ -10,14 +14,25 @@ const Home = () => {
           </h1>
           <p className="my-4 text-white">create your online portfolio website</p>
 
-          <NavLink to="/login">
-            <button className="sm:w-full lg:w-auto my-4 border rounded-md bg-violet-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">
-              Get Started!
-            </button>
-          </NavLink>
+          {isLoggedIn ? (
+            <NavLink to="/create">
+              <button className="sm:w-full lg:w-auto my-4 border rounded-md bg-violet-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">
+                Get Started!
+              </button>
+            </NavLink>
+          ) : (
+            <Link to="/login">
+              <button className="sm:w-full lg:w-auto my-4 border rounded-md bg-violet-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500">
+                Get Started!
+              </button>
+            </Link>
+          )}
         </div>
         <div className="w-1/2">
-          <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/aa8625109287767.5fd08439c7676.jpg" />
+          <img
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/aa8625109287767.5fd08439c7676.jpg"
+            className="rounded-md"
+          />
         </div>
       </div>
 
@@ -37,9 +52,13 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="bg-black lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center flex justify-center flex-col-reverse lg:flex-row md:gap-28 gap-16">
-        <div className="w-1/2">
-          <img src="https://img.freepik.com/free-vector/social-media-3d-concept-background_52683-96688.jpg?w=1480&t=st=1700838278~exp=1700838878~hmac=8ade2b6a964518bb119bf7d7fc95c0a00e1d88055059fd8f1fb174ac61ace330" />
+      <div className="bg-black lg:px-24 lg:py-24 md:py-20 md:px-44 px-4 py-24 items-center grid grid-cols-2 justify-center lg:flex-row md:gap-28 gap-16">
+        <div className="w-auto h-full relative bg-gray-50 shadow-xl px-6 mt-3 rounded-md">
+          <Carousel>
+            <img src="/register.png" />
+            <img src="/create.png" />
+            <img src="/portfolio.png" />
+          </Carousel>
         </div>
         <div className="text-white xl:pt-24 w-full xl:w-1/2 relative pb-12 lg:pb-0">
           <h2 className="text-5xl font-bold bg-gradient-to-r from-violet-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text">

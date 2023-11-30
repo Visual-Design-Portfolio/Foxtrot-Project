@@ -18,8 +18,10 @@ import { StepIconProps, Button, Stack, Step, StepLabel, Stepper, Typography } fr
 import Check from '@mui/icons-material/Check'
 import useHandleForm from '../hooks/useHandleForm'
 import { AnimatePresence, motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 
 const Create = () => {
+<<<<<<< HEAD
   const { steps, activeStep, complete, handleBack, handleNext, isLastStep } = useHandleForm()
   const { createPortfolio } = usePortfolios()
   const [portfolioInfo, setPortfolioInfo] = useState<PortfolioInfoDTO>(initialPortInfo)
@@ -27,6 +29,51 @@ const Create = () => {
   const [projectList, setProjectList] = useState<ProjectDTO[]>(initialProjectList)
   const [educationList, setEducationList] = useState<EducationDTO[]>(initialEducationList)
   const [workExperienceList, setWorkExperienceList] = useState<WorkExperienceDTO[]>(initialWorkExperienceList)
+=======
+  const navigate = useNavigate()
+  const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+    [`&.${stepConnectorClasses.alternativeLabel}`]: {
+      top: 22,
+    },
+    [`&.${stepConnectorClasses.active}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        backgroundImage: 'linear-gradient( 95deg,rgb(131,111,255) 0%,rgb(112,71,247) 50%,rgb(77,51,214) 100%)',
+      },
+    },
+    [`&.${stepConnectorClasses.completed}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        backgroundImage: 'linear-gradient( 95deg,rgb(131,111,255) 0%,rgb(112,71,247) 50%,rgb(77,51,214) 100%)',
+      },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+      height: 3,
+      border: 0,
+      backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[800] : '#eaeaf0',
+      borderRadius: 1,
+    },
+  }))
+
+  const ColorlibStepIconRoot = styled('div')<{
+    ownerState: { completed?: boolean; active?: boolean }
+  }>(({ theme, ownerState }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
+    zIndex: 1,
+    color: '#fff',
+    width: 50,
+    height: 50,
+    display: 'flex',
+    borderRadius: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...(ownerState.active && {
+      backgroundImage: 'linear-gradient( 95deg,rgb(131,111,255) 0%,rgb(112,71,247) 50%,rgb(77,51,214) 100%)',
+      boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
+    }),
+    ...(ownerState.completed && {
+      backgroundImage: 'linear-gradient( 95deg,rgb(131,111,255) 0%,rgb(112,71,247) 50%,rgb(77,51,214) 100%)',
+    }),
+  }))
+>>>>>>> main
 
   function ColorlibStepIcon(props: StepIconProps) {
     const { active, completed, className } = props
@@ -142,6 +189,7 @@ const Create = () => {
 
       setWorkExperienceList(initialWorkExperienceList)
       setEducationList(initialEducationList)
+      navigate('/dashboard')
     } catch (err) {
       console.log(err)
     }

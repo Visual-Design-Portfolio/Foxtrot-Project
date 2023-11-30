@@ -153,13 +153,13 @@ const Register = () => {
         </div>
       </div>
       {/* Right Pane */}
-      <div className="w-full bg-gradient-to-r from-purple-500 to-indigo-500 lg:w-1/2 flex items-center justify-center">
+      <div className="w-full bg-black lg:w-1/2 flex items-center justify-center">
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 className="py-5 mt-10 text-center text-4xl font-bold leading-9 tracking-tight text-white">
               Let’s make your Portfolio
             </h2>
-            <div className="max-w-md text-center">
+            <div className="max-w-md text-center pt-10">
               <img src="/bgregister.svg" />
             </div>
           </div>
