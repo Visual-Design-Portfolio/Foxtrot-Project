@@ -19,6 +19,7 @@ import Check from '@mui/icons-material/Check'
 import useHandleForm from '../hooks/useHandleForm'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 const Create = () => {
   const { steps, activeStep, complete, handleBack, handleNext, isLastStep } = useHandleForm()
@@ -151,63 +152,66 @@ const Create = () => {
   }
 
   return (
-    <div className="flex flex-col w-full min-h-screen">
-      <h1 className="m-10 font-extrabold text-4xl  mx-auto text-center flex justify-center text-black ">
-        Get Started on Your Portfolio
-      </h1>
-      <div className="">
-        <Stack>
-          {/* number step */}
-          <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          {/* number step */}
-        </Stack>
-      </div>
+    <>
+      <Navbar />
+      <div className="flex flex-col w-full min-h-screen">
+        <h1 className="m-10 font-extrabold text-4xl  mx-auto text-center flex justify-center text-black ">
+          Get Started on Your Portfolio
+        </h1>
+        <div className="">
+          <Stack>
+            {/* number step */}
+            <Stepper alternativeLabel activeStep={activeStep} connector={<ColorlibConnector />}>
+              {steps.map((label) => (
+                <Step key={label}>
+                  <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
+            {/* number step */}
+          </Stack>
+        </div>
 
-      {/* Display Form */}
-      <div className=" m-10 p-10 bg-slate-100 rounded-xl h-full">
-        <Typography>{PageDisplay(activeStep)}</Typography>
+        {/* Display Form */}
+        <div className=" m-10 p-10 bg-slate-100 rounded-xl h-full">
+          <Typography>{PageDisplay(activeStep)}</Typography>
 
-        {/* Button */}
-        <div className="flex justify-between pt-2">
-          <motion.div
-            className="animatable"
-            whileHover={{
-              scale: 1.2,
-              transition: { duration: 0.3 },
-            }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
-              Back
-            </Button>
-          </motion.div>
-          <motion.div
-            className="animatable"
-            whileHover={{
-              scale: 1.2,
-              transition: { duration: 0.3 },
-            }}
-            whileTap={{ scale: 0.9 }}
-          >
-            {!complete && (
-              <Button
-                type="submit"
-                onClick={(e) => (isLastStep ? handleSubmit(e) : handleNext())}
-                variant={isLastStep ? 'contained' : 'outlined'}
-              >
-                {isLastStep ? 'Finish' : 'Next'}
+          {/* Button */}
+          <div className="flex justify-between pt-2">
+            <motion.div
+              className="animatable"
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Button color="inherit" disabled={activeStep === 0} onClick={handleBack} sx={{ mr: 1 }}>
+                Back
               </Button>
-            )}
-          </motion.div>
+            </motion.div>
+            <motion.div
+              className="animatable"
+              whileHover={{
+                scale: 1.2,
+                transition: { duration: 0.3 },
+              }}
+              whileTap={{ scale: 0.9 }}
+            >
+              {!complete && (
+                <Button
+                  type="submit"
+                  onClick={(e) => (isLastStep ? handleSubmit(e) : handleNext())}
+                  variant={isLastStep ? 'contained' : 'outlined'}
+                >
+                  {isLastStep ? 'Finish' : 'Next'}
+                </Button>
+              )}
+            </motion.div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
