@@ -29,7 +29,11 @@ const sliderVariants = {
   },
 }
 
-const Hero = () => {
+interface HeroProps {
+  ownerName:string
+}
+
+const Hero = ({ownerName}:HeroProps) => {
   return (
     <div id="Home" className="h-[calc(100vh-96px)] ">
       <motion.div className="max-w-[1280px] h-full m-auto flex pb-36">
@@ -48,7 +52,7 @@ const Hero = () => {
             // bg-gradient-to-r from-green-300 via-blue-500 to-purple-600
             className="md:text-4xl lg:text-5xl xl:text-6xl text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 "
           >
-            Siriyakorn Sanit
+            {ownerName}
           </motion.h1>
           <motion.h2 variants={textVariants} className="md:text-4xl lg:text-6xl xl:text-7xl text-2xl font-extrabold  ">
             <Typed

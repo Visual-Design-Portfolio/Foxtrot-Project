@@ -29,6 +29,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/create" element={<Create />} />
           </Route>
+          <Route path="/template/:id" element={<Template />} />
           <Route path="/template" element={<Template />} />
         </Routes>
         {isShowNavbar ? <Footer /> : null}

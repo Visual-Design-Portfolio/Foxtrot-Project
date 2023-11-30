@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
+import usePortfolios from '../hooks/usePortfolios'
+import Table from '../components/PortfolioTable/Table'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-// import Table from "../components/PortfolioTable/Table"
-// import usePortfolios from '../hooks/usePortfolios'
 
 const Dashboard = () => {
-  // const { personalPortfolio } = usePortfolios()
+  const { personalPortfolio } = usePortfolios()
 
   return (
     <>
@@ -41,9 +41,12 @@ const Dashboard = () => {
             <h1 className="font-bold text-xl py-4 uppercase">My Portfolio</h1>
 
             {/* <div className="bg-black/60 to-white/5 p-6 rounded-lg col-span-8">
-            <Table data={personalPortfolio} />
+            <Table data={personalPortfolio}/>
           </div> */}
 
+            <div className="flex flex-col">
+              <Table data={personalPortfolio} />
+            </div>
             <div className="flex col-span-3 m-3 justify-center items-center gap-6">
               <Link to="/template">
                 <img src="/Card.svg" />
