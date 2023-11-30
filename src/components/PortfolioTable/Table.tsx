@@ -10,15 +10,19 @@ const Table = ({ data }: ITableProps) => {
     console.log(`clicked ${id}`)
   }
   return (
-    <div>
+    <>
       {data.map((portfolio, index) => (
-        <div key={index} className="w-36 h-36 bg-purple-800 mb-4" onClick={() => handleClick(portfolio._id)}>
+        <div
+          key={index}
+          className="flex p-2 w-40 h-36 rounded-lg bg-purple-800 mb-4 items-center justify-center"
+          onClick={() => handleClick(portfolio._id)}
+        >
           <Link to={`/template/${portfolio._id}`}>
             <h1>{portfolio.name}</h1>
           </Link>
         </div>
       ))}
-    </div>
+    </>
   )
 }
 
