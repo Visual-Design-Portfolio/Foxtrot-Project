@@ -22,7 +22,7 @@ const TemplateExample = () => {
       <section id="workExperience" className="my-12">
         <Experience />
       </section>
-      <section id="Education" className="my-12">
+      <section id="Education" className="">
         <EducationSection />
       </section>
     </main>
