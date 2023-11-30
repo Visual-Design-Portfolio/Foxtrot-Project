@@ -1,7 +1,7 @@
-import { ReactNode, createContext, useContext, useState } from 'react'
-import { CredentialDTO, LoginDTO, RegisterDTO } from '../types/dto'
 import axios from 'axios'
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { CredentialDTO, LoginDTO, RegisterDTO, UserDTO } from '../types/dto'
 import { API_HOST } from '../utils/api'
 
 interface IAuthProviderProps {
@@ -12,8 +12,8 @@ interface IAuthContextType {
   success: string | null
   error: string | null
   isLoggedIn: boolean
-  email: string | null
   token: string | null
+  userInfo: UserDTO | null
   logout: () => void
   login: (email: string, password: string) => Promise<void>
   register: (registerData: RegisterDTO) => Promise<void>
@@ -32,10 +32,21 @@ export const useAuth = () => {
 const AuthProvider = ({ children }: IAuthProviderProps) => {
   const [token, setToken] = useState<string | null>(localStorage.getItem('token'))
   const [isLoggedIn, setIsLoggedin] = useState<boolean>(!!token)
-  const [email, setEmail] = useState<string | null>(localStorage.getItem('email'))
   const [success, setSuccess] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [userInfo, setUserInfo] = useState<UserDTO | null>(null)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    axios.get<UserDTO>(`${API_HOST}/auth/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).then(({data}) =>
+      setUserInfo(data)
+    )
+  }, [token])
+
 
   const register = async (registerData: RegisterDTO) => {
     try {
@@ -69,7 +80,6 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
       localStorage.setItem('email', email)
       setToken(res.data.accessToken)
       setIsLoggedin(true)
-      setEmail(email)
     } catch (err) {
       throw new Error('Invalid email or password')
     }
@@ -77,11 +87,10 @@ const AuthProvider = ({ children }: IAuthProviderProps) => {
   const logout = () => {
     localStorage.clear()
     setIsLoggedin(false)
-    setEmail(null)
     navigate('/')
   }
   return (
-    <AuthContext.Provider value={{ success, error, register, isLoggedIn, login, email, logout, token }}>
+    <AuthContext.Provider value={{ success, error, register, isLoggedIn, login, logout, token, userInfo }}>
       {children}
     </AuthContext.Provider>
   )
