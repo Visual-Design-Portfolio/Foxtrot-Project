@@ -1,4 +1,4 @@
-import EducationSection from '../Template/EducationSection'
+import EducationSectionExample from './EducationSectionExample'
 import ExperienceSectionExample from './ExperienceSectionExample'
 import HeroSectionExample from './HeroSectionExample'
 import NavbarSectionExample from './NavbarExample/NavbarSectionExample'
@@ -23,7 +23,7 @@ const TemplateExample = () => {
         <ExperienceSectionExample />
       </section>
       <section id="Education" className="">
-        <EducationSection />
+        <EducationSectionExample />
       </section>
     </main>
   )

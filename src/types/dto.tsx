@@ -133,8 +133,8 @@ export interface Education {
   school: string
   degree: string
   major: string
-  startDate: string
-  endDate: string
+  startDate: Date
+  endDate: Date
   _id: string
 }
 
