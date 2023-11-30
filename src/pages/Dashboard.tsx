@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import Table from '../components/PortfolioTable/Table'
@@ -46,10 +46,10 @@ const Dashboard = () => {
             <Table data={personalPortfolio}/>
           </div> */}
 
-            <div className="flex flex-col">
+            <div className="flex flex-row m-3 justify-center gap-8">
               <Table data={personalPortfolio} />
             </div>
-            <div className="flex col-span-3 m-3 justify-center items-center gap-6">
+            {/* <div className="flex col-span-3 m-3 justify-center items-center gap-6">
               <Link to="/template">
                 <img src="/Card.svg" />
               </Link>
@@ -58,8 +58,8 @@ const Dashboard = () => {
               </Link>
               <Link to="/template">
                 <img src="/Card2.svg" />
-              </Link>
-            </div>
+              </Link> */}
+            {/* </div> */}
           </div>
         </div>
       </div>
