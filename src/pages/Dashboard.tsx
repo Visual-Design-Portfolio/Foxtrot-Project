@@ -46,7 +46,7 @@ const Dashboard = () => {
             <Table data={personalPortfolio}/>
           </div> */}
 
-            <div className="flex flex-row m-3 justify-center gap-8">
+            <div className="flex justify-start items-center gap-10 mt-10 flex-wrap ">
               <Table data={personalPortfolio} />
             </div>
             {/* <div className="flex col-span-3 m-3 justify-center items-center gap-6">
